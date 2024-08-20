@@ -1,0 +1,77 @@
+import datetime
+import re
+
+def chatbot_response(user_input):
+    user_input = user_input.lower()
+    
+    if 'hello' in user_input or 'hi' in user_input:
+        return "Hello! How can I help you today?"
+    elif 'bye' in user_input or 'goodbye' in user_input:
+        return "Goodbye! Have a great day!"
+    elif 'your name' in user_input:
+        return "I am ChatBot, your virtual assistant."
+    elif 'how are you' in user_input:
+        return "I'm good. How about you?"
+    elif 'help' in user_input or '?' in user_input:
+        return "I can respond to greetings like 'hello' and 'hi', questions about my name, and general queries. Here are some things you can ask:\n- Current time\n- Today's date\n- Tell me a joke\n- What's the weather\n- Latest news\n- Inspire me\n- Give me a fun fact\n- What's the capital of a country\n- How do you work?"
+    elif 'time' in user_input:
+        return f"The current time is {datetime.datetime.now().strftime('%H:%M:%S')}."
+    elif 'date' in user_input:
+        return f"Today's date is {datetime.datetime.now().strftime('%Y-%m-%d')}."
+    elif 'joke' in user_input:
+        return "How does an ocean say hi? It waves. Hahaha!"
+    elif 'weather' in user_input:
+        return "I'm not connected to a weather service at the moment, but you can check your local weather online."
+    elif 'news' in user_input:
+        return "I can't provide live news updates, but you can check the latest news on major news websites."
+    elif 'inspire me' in user_input:
+        return "Life is like riding a bicycle. To keep your balance, you must keep moving. - Albert Einstein"
+    elif 'fun fact' in user_input:
+        return "Did you know? Ketchup was once sold as a medicine."
+    elif 'capital of' in user_input:
+        # Using regex to handle flexible input
+        match = re.search(r'capital of\s+(\w+)', user_input)
+        if match:
+            country = match.group(1).capitalize()
+            capitals = {
+                'France': 'Paris',
+                'Spain': 'Madrid',
+                'Germany': 'Berlin',
+                'Italy': 'Rome',
+                'Canada': 'Ottawa',
+                'United States': 'Washington, D.C.',
+                'Australia': 'Canberra',
+                'Brazil': 'Brasília',
+                'India': 'New Delhi',
+                'China': 'Beijing',
+                'Japan': 'Tokyo',
+            }
+
+            return f"The capital of {country} is {capitals.get(country, 'unknown')}."
+    elif 'how do you work' in user_input:
+        return "I use predefined rules and pattern matching to understand and respond to your queries. I'm constantly learning and evolving to serve you better!"
+    else:
+        return "I'm not sure how to respond to that. Can you please rephrase or ask for help?"
+
+def main():
+    print("ChatBot: Hello! I am your virtual assistant. Type 'bye' to exit.")
+    print("ChatBot: You can ask me about my name, greet me, ask for the time or date, and more. If you need help, just ask!")
+
+    while True:
+        # Getting the user input
+        user_input = input("You: ")
+
+        # Checking if the user wants to exit
+        if 'bye' in user_input.lower() or 'goodbye' in user_input.lower():
+            print("ChatBot: Okk Goodbye! Have a great day!")
+            break
+
+        # Getting chatbot response
+        response = chatbot_response(user_input)
+
+        # Printing chatbot response
+        print("ChatBot:", response)
+
+# Running the chatbot
+if __name__ == "__main__":
+  main()
